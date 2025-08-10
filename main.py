@@ -1,24 +1,17 @@
 # movie search
 
-import requests
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
+import tkinter
+from movie_search import MovieSearch
+import pprint
 
 
-API_KEY = os.getenv("OMDB_API_KEY")
-API_URL = os.getenv("OMDB_API_URL")
 
-request_data = {
-    "apikey": API_KEY,
-    "i": "tt3460252"
-}
+movie_search = MovieSearch()
 
+isLooped = True
 
-response = requests.get(url=API_URL, params=request_data)
+while isLooped:
+    movie_name = input("Enter the movie: ")
+    data = movie_search.get_movie_data(movie_name)
 
-
-response.raise_for_status()
-print(response.url)
-print(response.text)
+    pprint.pprint(data)
